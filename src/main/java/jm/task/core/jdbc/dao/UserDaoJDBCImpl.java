@@ -2,6 +2,9 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,8 +33,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         try (Connection connection = util.getConnection();
              Statement statement = connection.createStatement()) {
-            statement.execute("DROP TABLE IF EXISTS " +
-                    tableName);
+            statement.execute("DROP TABLE IF EXISTS " + tableName);
         } catch (Exception e) {
             System.err.println("Не удалось удалить таблицу.");
         }
